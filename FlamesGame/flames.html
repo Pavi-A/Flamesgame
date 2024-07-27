@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMES GAME</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #f5a623, #f76b1c);
+            margin: 0;
+            color: #fff;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FLAMES GAME</h1>
+        <form id="flamesForm">
+            <label for="name1">Name 1:</label><br>
+            <input type="text" id="name1" required>
+            <br><br>
+            <label for="name2">Name 2:</label><br>
+            <input type="text" id="name2" required>
+            <br><br>
+            <button type="submit">Find Relationship</button>
+        </form>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        document.getElementById('flamesForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name1 = document.getElementById('name1').value.toLowerCase().replace(/\s+/g, '');
+            const name2 = document.getElementById('name2').value.toLowerCase().replace(/\s+/g, '');
+
+            let combinedNames = name1 + name2;
+
+            for (let char of name1) {
+                combinedNames = combinedNames.replace(char, '');
+            }
+            for (let char of name2) {
+                combinedNames = combinedNames.replace(char, '');
+            }
+
+            const count = combinedNames.length;
+
+            const flames = ['Friends', 'Love', 'Affection', 'Marriage', 'Enemy', 'Siblings'];
+            let index = count % flames.length;
+
+            document.getElementById('result').textContent = `The relationship is: ${flames[index]}`;
+        });
+    </script>
+</body>
+</html>
